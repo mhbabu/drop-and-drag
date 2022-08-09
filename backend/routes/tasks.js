@@ -28,7 +28,7 @@ router.put("/:id", [validateObjectId], async (req, res) => {
   );
 
   if (!task)
-    return res.status(404).send("The task with the given ID was not found.");
+    return res.status(404).send("The task with the given ID is not found.");
 
   res.send(task);
 });
@@ -37,7 +37,7 @@ router.delete("/:id", [validateObjectId], async (req, res) => {
   const task = await Task.findByIdAndRemove(req.params.id);
 
   if (!task)
-    return res.status(404).send("The task with the given ID was not found.");
+    return res.status(404).send("The task with the given ID is not found.");
 
   res.send(task);
 });
@@ -46,7 +46,7 @@ router.get("/:id", validateObjectId, async (req, res) => {
   const task = await Task.findById(req.params.id).select("-__v");
 
   if (!task)
-    return res.status(404).send("The task with the given ID was not found.");
+    return res.status(404).send("The task with the given ID is not found.");
 
   res.send(task);
 });
