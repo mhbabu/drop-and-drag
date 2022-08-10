@@ -1,4 +1,4 @@
-*{
+/* *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -38,8 +38,8 @@
     margin-bottom: 15px;
     margin-bottom: 15px;
   
-  }
-/* .pointer{
+  } */
+.pointer{
   cursor: pointer;
 }
 .board-area {
@@ -68,4 +68,4 @@
 }
 .invisible {
   display: none;
-} */
+}

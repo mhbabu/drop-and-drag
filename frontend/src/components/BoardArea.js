@@ -15,40 +15,40 @@ export default function BoardArea() {
   }, []);
 
   return (
-    <div className="card">
-      <div className="card-body mt-5">
+    <div className='card'>
+      <div className='card-body mt-5'>
         <Form taskList={taskList} setTaskList={setTaskList} />
-        <div className="row">
-          <div className="col-md-12 mt-5">
-            <div className="board-area">
-              <div className="column">
+        <div className='row'>
+          <div className='col-md-12 mt-5'>
+            <div className='board-area'>
+              <div className='column'>
                 <h1>To Do</h1>
                 {taskList?.map(
                   (task) =>
                     task.status === "To Do" && (
-                      <div key={task?._id} className="item">
+                      <div draggable key={task?._id} className='item'>
                         {task.name}
                       </div>
                     )
                 )}
               </div>
-              <div className="column">
+              <div className='column'>
                 <h1>In progress</h1>
                 {taskList?.map(
                   (task) =>
                     task.status === "Progress" && (
-                      <div key={task?._id} className="item">
+                      <div draggable key={task?._id} className='item'>
                         {task.name}
                       </div>
                     )
                 )}
               </div>
-              <div className="column">
+              <div className='column'>
                 <h1>Completed</h1>
                 {taskList?.map(
                   (task) =>
                     task.status === "Complete" && (
-                      <div key={task?._id} className="item">
+                      <div draggable key={task?._id} className='item'>
                         {task.name}
                       </div>
                     )
