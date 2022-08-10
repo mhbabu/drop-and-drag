@@ -1,21 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Form from "./Form";
+import { getTasks } from "../services/taskService";
 
 export default function BoardArea() {
-  
+  const [taskList, setTaskList] = useState();
+
+  const fetchData = async () => {
+    let { data: tasks } = await getTasks();
+    setTaskList(tasks);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  console.log(taskList);
+
   return (
     <div className="card">
       <div className="card-body mt-5">
-        <Form/>
+        <Form taskList={taskList} setTaskList={setTaskList}/>
         <div className="row">
           <div className="col-md-12 mt-5">
             <div className="board-area">
               <div className="column">
                 <h1>To Do</h1>
-                <div className="item">Wash Clothes</div>
-                <div className="item">Meeting at 9AM</div>
-                <div className="item">Fix workshop</div>
-                <div className="item">Visit the zoo</div>
+                {taskList?.map((task) => (
+                  <div key={task?._id??"asd"} className="item">
+                    {task.name}
+                  </div>
+                ))}
               </div>
               <div className="column">
                 <h1>In progress</h1>

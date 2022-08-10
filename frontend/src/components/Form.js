@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import Joi from "joi-browser";
 import { saveTask } from "../services/taskService";
 
-export default function Form() {
+export default function Form({ taskList, setTaskList }) {
   const initialData = { name: "" };
   const [formData, setFormData] = useState(initialData);
   const [formErrors, setFormErrors] = useState({});
 
   const dataSchema = {
-    name: Joi.string().required().min(3).max(255).label("Name"),
+    name: Joi.string().trim().min(3).max(255).required().label("Task Name"),
   };
 
   const handleOnChange = ({ currentTarget: input }) => {
@@ -43,10 +43,15 @@ export default function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validate();
+
     setFormErrors(errors || {});
     if (errors) return;
 
-    await saveTask(formData);
+    const { data } = await saveTask(formData);
+
+    let tasks = [...taskList];
+    tasks.push(data);
+    setTaskList(tasks);
   };
 
   return (
