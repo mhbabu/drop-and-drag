@@ -3,8 +3,7 @@ import Joi from "joi-browser";
 import { saveTask } from "../services/taskService";
 
 export default function Form({ taskList, setTaskList }) {
-  const initialData = { name: "" };
-  const [formData, setFormData] = useState(initialData);
+  const [formData, setFormData] = useState({});
   const [formErrors, setFormErrors] = useState({});
 
   const dataSchema = {
@@ -50,14 +49,15 @@ export default function Form({ taskList, setTaskList }) {
     const { data } = await saveTask(formData);
 
     let tasks = [...taskList];
-    tasks.push(data);
+    tasks.unshift(data);
+    setFormData({ name: "" });
     setTaskList(tasks);
   };
 
   return (
     <div className="row">
       <div className="col-md-4 mx-auto">
-        <form onSubmit={handleSubmit}>
+        <form id="taskForm" onSubmit={handleSubmit}>
           <div className="form-group d-flex">
             <input
               type="text"
