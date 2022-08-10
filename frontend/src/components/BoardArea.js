@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Form from "./Form";
 import { getTasks } from "../services/taskService";
+import Form from "./Form";
 
 export default function BoardArea() {
   const [taskList, setTaskList] = useState();

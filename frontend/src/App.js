@@ -6,8 +6,8 @@ function App() {
   return (
     <div className="App">
       <main className="flexbox">
-        <BoardArea />
-        {/* <Board className="board" id="bord-1">
+        {/* <BoardArea /> */}
+        <Board className="board" id="bord-1">
           <Card id="card-1" className="card" draggable="true">
             <p>Card one</p>
           </Card>
@@ -17,7 +17,7 @@ function App() {
           <Card id="card-2" className="card" draggable="true">
             <p>Card two</p>
           </Card>
-        </Board> */}
+        </Board>
       </main>
     </div>
   );
