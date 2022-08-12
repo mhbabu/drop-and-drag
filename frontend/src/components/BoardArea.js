@@ -5,9 +5,9 @@ import Form from "./Form";
 export default function BoardArea() {
   const [taskList, setTaskList] = useState();
 
-  const dragStarted = (e, id) => {
-    console.log("Draging over now");
-    e.dataTransfer.setData("todo", 'BABU');
+  const dragStarted = (e, taskId, status) => {
+    const task = { _id: taskId, status };
+    e.dataTransfer.setData("task", JSON.stringify(task));
   };
 
   const draggingOver = (e) => {
@@ -16,9 +16,8 @@ export default function BoardArea() {
   };
 
   const dragDropped = (e) => {
-    console.log("You have dropped");
-    let transferData = e.dataTransfer.getData("todo");
-    console.log(transferData);
+    let transferData = JSON.parse(e.dataTransfer.getData("task"));
+    console.log("dragDropped", document.querySelector(".column").attributes.id);
   };
 
   const fetchData = async () => {
@@ -26,36 +25,46 @@ export default function BoardArea() {
     setTaskList(tasks);
   };
 
+  const handleDragEnter = (e) => {
+    console.log("handleDragEnter", e.target);
+  };
+
+  const handleDragLeave = (e) => {
+    console.log("handleDragLeave", e.target);
+  };
+
   useEffect(() => {
     fetchData();
   }, []);
 
   return (
-    <div className="card">
-      <div className="card-body mt-5">
+    <div className='card'>
+      <div className='card-body mt-5'>
         <Form taskList={taskList} setTaskList={setTaskList} />
-        <div className="row">
-          <div className="col-md-12 mt-5">
-            <div className="board-area">
-              <div className="column">
+        <div className='row'>
+          <div className='col-md-12 mt-5'>
+            <div className='board-area'>
+              <div className='column' id='To Do'>
                 <h1>To Do</h1>
                 {taskList?.map(
                   (task) =>
                     task.status === "To Do" && (
                       <div
                         key={task?._id}
-                        draggable
-                        onDragStart={(e) => dragStarted(e, task._id)}
+                        draggable={true}
+                        onDragStart={(e) => dragStarted(e, task._id, "To Do")}
                         onDragOver={(e) => draggingOver(e)}
                         onDrop={(e) => dragDropped(e)}
-                        className="item"
+                        onDragEnter={(e) => handleDragEnter(e)}
+                        onDragLeave={(e) => handleDragLeave(e)}
+                        className='item'
                       >
-                        {task.name}
+                        {task.title}
                       </div>
                     )
                 )}
               </div>
-              <div className="column">
+              <div className='column' id='Progress'>
                 <h1>In progress</h1>
                 {taskList?.map(
                   (task) =>
@@ -63,30 +72,38 @@ export default function BoardArea() {
                       <div
                         key={task?._id}
                         draggable
-                        onDragStart={(e) => dragStarted(e, task._id)}
+                        onDragStart={(e) =>
+                          dragStarted(e, task._id, "Progress")
+                        }
                         onDragOver={(e) => draggingOver(e)}
                         onDrop={(e) => dragDropped(e)}
-                        className="item"
+                        onDragEnter={(e) => handleDragEnter(e)}
+                        onDragLeave={(e) => handleDragLeave(e)}
+                        className='item'
                       >
-                        {task.name}
+                        {task.title}
                       </div>
                     )
                 )}
               </div>
-              <div className="column">
+              <div className='column' id='Completed'>
                 <h1>Completed</h1>
                 {taskList?.map(
                   (task) =>
-                    task.status === "Complete" && (
+                    task.status === "Completed" && (
                       <div
                         key={task?._id}
                         draggable
-                        onDragStart={(e) => dragStarted(e, task._id)}
+                        onDragStart={(e) =>
+                          dragStarted(e, task._id, "Completed")
+                        }
                         onDragOver={(e) => draggingOver(e)}
                         onDrop={(e) => dragDropped(e)}
-                        className="item"
+                        onDragEnter={(e) => handleDragEnter(e)}
+                        onDragLeave={(e) => handleDragLeave(e)}
+                        className='item'
                       >
-                        {task.name}
+                        {task.title}
                       </div>
                     )
                 )}

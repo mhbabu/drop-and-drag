@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  let task = new Task({ name: req.body.name });
+  let task = new Task({ title: req.body.title });
   task = await task.save();
 
   res.send(task);
@@ -23,7 +23,7 @@ router.put("/:id", [validateObjectId], async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
   const task = await Task.findByIdAndUpdate(
     req.params.id,
-    { name: req.body.name },
+    { title: req.body.title },
     { new: true }
   );
 

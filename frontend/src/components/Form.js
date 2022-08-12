@@ -3,11 +3,11 @@ import Joi from "joi-browser";
 import { saveTask } from "../services/taskService";
 
 export default function Form({ taskList, setTaskList }) {
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({ title: "" });
   const [formErrors, setFormErrors] = useState({});
 
   const dataSchema = {
-    name: Joi.string().trim().min(3).max(255).required().label("Task Name"),
+    title: Joi.string().trim().min(3).max(255).required().label("Task"),
   };
 
   const handleOnChange = ({ currentTarget: input }) => {
@@ -50,29 +50,29 @@ export default function Form({ taskList, setTaskList }) {
 
     let tasks = [...taskList];
     tasks.unshift(data);
-    setFormData({ name: "" });
+    setFormData({ title: "" });
     setTaskList(tasks);
   };
 
   return (
-    <div className="row">
-      <div className="col-md-4 mx-auto">
-        <form id="taskForm" onSubmit={handleSubmit}>
-          <div className="form-group d-flex">
+    <div className='row'>
+      <div className='col-md-4 mx-auto'>
+        <form id='taskForm' onSubmit={handleSubmit}>
+          <div className='form-group d-flex'>
             <input
-              type="text"
-              name="name"
+              type='text'
+              name='title'
               value={formData["name"]}
-              className="form-control"
-              placeholder="Enter task name"
+              className='form-control'
+              placeholder='Enter a task'
               onChange={handleOnChange}
             />
-            <button type="submit" className="btn btn-primary ml-2 pointer">
+            <button type='submit' className='btn btn-primary ml-2 pointer'>
               Add
             </button>
           </div>
-          {formErrors["name"] && (
-            <div className="alert alert-danger">{formErrors["name"]}</div>
+          {formErrors["title"] && (
+            <div className='alert alert-danger'>{formErrors["title"]}</div>
           )}
         </form>
       </div>

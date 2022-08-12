@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Joi = require("joi");
 
 const taskSchema = new mongoose.Schema({
-  name: {
+  title: {
     type: String,
     trim: true,
     maxlength: 255,
@@ -10,7 +10,7 @@ const taskSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["To Do", "Progress", "Done"],
+    enum: ["To Do", "Progress", "Completed"],
     default: "To Do",
   },
 });
@@ -19,7 +19,7 @@ const Task = mongoose.model("Task", taskSchema);
 
 function validateTask(task) {
   const schema = Joi.object({
-    name: Joi.string().trim().required(),
+    title: Joi.string().trim().required(),
   });
 
   return schema.validate(task);
