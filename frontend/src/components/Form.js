@@ -62,7 +62,7 @@ export default function Form({ taskList, setTaskList }) {
             <input
               type='text'
               name='title'
-              value={formData["name"]}
+              value={formData["title"]}
               className='form-control'
               placeholder='Enter a task'
               onChange={handleOnChange}

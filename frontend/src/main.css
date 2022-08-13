@@ -1,4 +1,4 @@
-/* *{
+*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -10,14 +10,28 @@
   
   .flexbox{
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    gap: 30px;
   
     width: 100%;
     max-width: 768px;
     height: 100vh;
     overflow: hidden;
     margin: 0 auto;
-    padding: 15px;
+    padding: 5px;
+  
+  }
+
+  .flex{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-direction: row;
+  
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 50px;
   
   }
   
@@ -27,7 +41,6 @@
     width: 100%;
     max-width: 300px;
     background-color: #313131;
-    padding: 15px;
   
   }
   
@@ -38,7 +51,7 @@
     margin-bottom: 15px;
     margin-bottom: 15px;
   
-  } */
+  }
 .pointer{
   cursor: pointer;
 }
@@ -51,7 +64,7 @@
 .column {
   flex-basis: 20%;
   background: #ddd;
-  min-height: 90vh;
+  min-height: 60vh;
   padding: 20px;
   border-radius: 10px;
 }
